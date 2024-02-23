@@ -1,4 +1,4 @@
-# BrightChat: Your Smart Chatbot Solution
+# BrightSpark: Your Smart Chatbot Solution
 
 Welcome to BrightChat, an intelligent chatbot solution developed by BrightSpeed! BrightChat leverages advanced technologies like Chroma DB and LangChain to provide seamless conversations and insightful interactions for users.
 
