@@ -27,11 +27,6 @@ BrightChat is designed to offer a smart and engaging conversational experience. 
    ```bash
     streamlit run app.py
 
-## Technology Stack
 
-- **Language Model**: Deployed on GCP Vertex AI
-- **Orchestrator**: LangChain
-- **Vector Database**: Pinecone
-- **Interface**: Streamlit
 
 
