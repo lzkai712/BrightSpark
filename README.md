@@ -9,7 +9,7 @@ BrightChat is designed to offer a smart and engaging conversational experience. 
 ## Features
 
 - **Advanced Conversational AI**: Utilizes LangChain for powerful conversational abilities.
-- **Efficient Vector Database**: Chroma DB enables fast and accurate retrieval of vector embeddings.
+- **Efficient Vector Database**: Pinecone enables fast and accurate retrieval of vector embeddings.
 - **Personalized Interactions**: Provides tailored responses based on user queries and context.
 - **Seamless User Experience**: Streamlit interface ensures smooth and intuitive interactions.
 
