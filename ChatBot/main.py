@@ -9,9 +9,6 @@ from datetime import datetime
 from bigquery import process_form_and_insert_data, insert_feedback
 from audio_recorder_streamlit import audio_recorder
 from utils import text_to_speech, autoplay_audio, speech_to_text
-from streamlit_float import *
-
-
 # Environment setup
 credentials = service_account.Credentials.from_service_account_file('credentials.json')
 project_id = 'theta-cell-406519'
@@ -136,10 +133,23 @@ st.sidebar.link_button(label="📝 FAQs",url="https://www.brightspeedplans.com/f
 st.sidebar.image("images/Brightspeed_Logo_Full.png",caption="Let's Connect")
 
 # Sidebar navigation
-sidebar_selection = st.sidebar.radio("Navigation", ["Home", "About", "Feedback"])
+sidebar_selection = st.sidebar.radio("Navigation", [ "About","Chatbot","Feedback"])
 
 # Handle sidebar navigation
-if sidebar_selection == "Home":
+if sidebar_selection == "About":
+    st.write("""Bright Spark is a chat bot leverages Retrieval Augmented Generation (RAG) powered by LangChain and a variety of "
+            tools,including document retrieval from vector databases and cloud services. With a Streamlit interface, users can
+            engage with an AI agent equipped with conversational memory, providing personalized interactions based on past discussions.
+            
+            Here are some example queries you can try with BrightSpark:
+
+            Can you tell me about BrightSpeed?
+            Who is the CEO of Brightspeed?
+            What Internet Plans are offer by BrightSpeed?
+            Display the list of products with their prices.
+            I am experiencing internet lag.
+            """)
+elif sidebar_selection == "Chatbot":
     if 'chat-history' not in st.session_state:
         st.session_state['chat-history'] = [{
             "content": "Hi, I'm a Brightspeed agent. How can I help you today?",
@@ -227,9 +237,8 @@ if sidebar_selection == "Home":
     audio_bytes = audio_recorder(text=" ",icon_size="2x")
     while user_input or audio_bytes:
         if user_input:
-            # message = anonymize(user_input) #add
             st.session_state['chat-history'].append({
-                "content": user_input,#message
+                "content": user_input,
                 "role": "user"
             })
             classifier = predict_text_classification_single_label_sample(content=user_input)
@@ -272,7 +281,7 @@ if sidebar_selection == "Home":
                         if st.session_state['chat-history'][-1]['role'] != "ai":
                             with st.chat_message("ai"):
                                 with st.spinner("Thinking🤔..."):
-                                    final_response = agent_execution.invoke({"input":transcript})
+                                    final_response = agent_execution.invoke({transcript})
                                     with st.spinner("Generating audio response..."):
                                         audio_file = text_to_speech(final_response["output"])
                                         autoplay_audio(audio_file)
